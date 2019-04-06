@@ -8,24 +8,23 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(windowWidth - 400, windowHeight - 300);
+  let canvas = createCanvas(windowWidth - 400, 250);
   canvas.parent('canvas-holder');
-  background('#eeeeee');
   canvas.mouseClicked(togglePlay);
   song.setVolume(.1);
   song.play();
-  let columns = 64;
-  fft = new p5.FFT(0.85, columns);
-  w = width / columns;
+  fft = new p5.FFT(0.75, 1024);
+  w = width / 64;
 }
 
 function draw(){
   background(0);
 
-  var spectrum = fft.analyze();
-  //strokeWeight(5);
+  // let spectrum = fft.analyze();
+  fft.analyze();
+  let spectrum = fft.linAverages(64);
   noStroke();
-  fill(255,30,30); // spectrum is green
+  fill(255,30,30); 
   for (let i = 0; i< spectrum.length; i++){
     let amp = spectrum[i];
     let y = map(amp, 0, 256, height, 0);
@@ -37,7 +36,6 @@ function draw(){
   }
 }
 
-// fade sound if mouse is over canvas
 function togglePlay() {
   if (song.isPlaying()) {
     song.pause();
