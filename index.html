@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Equalizer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #000;
+      position: relative;
+      font-family: 'segoe ui', sans-serif
+    }
+    main {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    main #canvas-holder {
+      margin-bottom: 0;
+    }
+    .details {
+      display: flex;
+    }
+    .details .logo {
+      height: 100px;
+      width: 100px;
+      border: none;
+      background-color: rgb(255, 30, 30);
+    }
+    .details{
+      margin-top: 15px;
+      display: flex;
+    }
+    .details .song-details {
+      margin-left: 15px;
+      display: block;
+      text-transform: uppercase;
+    }
+    .details .song-details h1 {
+      margin-top: 0;
+      font-size: 50px;
+      line-height: 60px;
+      margin-bottom: 0px;
+      color: #fff;
+    }
+    .details .song-details h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 1em;
+      color: #ddd;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main>
+      <div id="canvas-holder"></div>
+      <div class="details">
+          <img class="logo" src="" alt="">
+          <div class="song-details">
+            <h1 class="song-name">Song Name</h1>
+            <h2 class="song-author">Author</h2>
+          </div>
+      </div>
+  </main>
+
+  <script src="p5/p5.js"></script>
+  <script src="p5/addons/p5.sound.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
