@@ -33,7 +33,7 @@ function setup() {
   canvas.parent('canvas-holder');
   canvas.mouseClicked(togglePlay);
   song.setVolume(.1);
-  song.play();
+  //song.play();
   fft = new p5.FFT(0.8, 1024);
   w = width / 64;
 }
