@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: #000;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+main #canvas-holder{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.details {
+  display: flex;
+}
+.details .logo {
+  height: 100px;
+  width: 100px;
+  border: none;
+  background-color: rgb(255, 30, 30);
+}
+.details{
+  margin-top: 15px;
+  display: flex;
+}
+.details .song-details {
+  margin-left: 15px;
+  display: block;
+  text-transform: uppercase;
+}
+.details .song-details h1 {
+  margin-top: 0;
+  font-size: 50px;
+  line-height: 60px;
+  margin-bottom: 0px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 3px #000;
+}
+.details .song-details h2 {
+  margin: 0;
+  line-height: 1em;
+  color: #ddd;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
