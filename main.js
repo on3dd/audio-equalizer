@@ -1,7 +1,22 @@
 let song;
 let fft;
 
+let songId = 0;
 let w;
+
+const prevBtn = document.querySelector('#prev-track');
+prevBtn.onclick = playPrev;
+
+const nextBtn = document.querySelector('#next-track');
+nextBtn.onclick = playNext;
+
+const pauseBtn = document.querySelector('#pause');
+pauseBtn.onclick = togglePlay;
+
+const songName = document.querySelector('#song-details__name'); 
+const songAuthor = document.querySelector('#song-details__author');
+const songCover = document.querySelector('#cover');
+
 
 function drawEq() {
   clear();
@@ -25,13 +40,14 @@ function drawEq() {
 }
 
 function preload() {
-  song = loadSound('assets/feint-time-bomb.mp3');
+  song = loadSound(tracks[songId].url);
 }
+
+changeData()
 
 function setup() {
   let canvas = createCanvas(windowWidth - 400, 250);
   canvas.parent('canvas-holder');
-  canvas.mouseClicked(togglePlay);
   song.setVolume(.1);
   //song.play();
   fft = new p5.FFT(0.8, 1024);
@@ -44,6 +60,11 @@ function draw(){
   fft.analyze();
   let spectrum = fft.linAverages(64);
   drawEq();
+
+  if ((song.isLoaded()) && (!song.isPlaying()) && (!song.isPaused())){
+    song.play();
+  }
+  song.onended(playNext);
 }
 
 function togglePlay() {
@@ -54,4 +75,36 @@ function togglePlay() {
     song.loop();
     loop();
   }
+}
+
+function playPrev() {
+  if (songId > 0) {
+    songId--;
+    changeSong();
+    changeData();
+  } else {
+    console.log('fuck you amerika');
+  }
+}
+
+function playNext() {
+  if (songId < tracks.length - 1) {
+    songId++;
+    changeSong();
+    changeData();
+  } else {
+    console.log('fuck you amerika');
+  }
+}
+
+function changeSong() {
+  song.stop();
+  song = loadSound(tracks[songId].url);
+  song.setVolume(.1);
+}
+
+function changeData() {
+  songName.textContent = tracks[songId].name;
+  songAuthor.textContent = tracks[songId].author;
+  songCover.src = tracks[songId].img;
 }

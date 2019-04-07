@@ -7,22 +7,29 @@
   <title>Equalizer</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   
 </head>
 <body>
   <main>
       <div id="canvas-holder"></div>
       <div class="details">
-          <img class="logo" src="" alt="">
+          <img id="cover" src="" alt="">
           <div class="song-details">
-            <h1 class="song-details__name">Song Name</h1>
-            <h2 class="song-details_author">Author</h2>
+            <h1 id="song-details__name">Song Name</h1>
+            <h2 id="song-details__author">Author</h2>
+          </div>
+          <div class="controls">
+            <button id="prev-track"><i class="fas fa-chevron-circle-left "></i></button>
+            <button id="pause"><i class="fas fa-pause-circle"></i></button>
+            <button id="next-track"><i class="fas fa-chevron-circle-right "></i></button>
           </div>
       </div>
   </main>
 
   <script src="p5/p5.min.js"></script>
   <script src="p5/p5.sound.min.js"></script>
+  <script src="tracks.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
