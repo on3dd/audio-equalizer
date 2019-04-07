@@ -17,7 +17,7 @@ main {
   display: flex;
   text-shadow: 0 0 10px #000;
 }
-.details #cover {
+.details #cover-canvas {
   height: 100px;
   width: 100px;
   border: 2px solid #000;
