@@ -15,6 +15,7 @@ main {
 .details{
   margin-top: 15px;
   display: flex;
+  width: 950px;
   text-shadow: 0 0 10px #000;
 }
 .details #cover-canvas {
@@ -28,6 +29,7 @@ main {
   display: block;
   text-transform: uppercase;
   cursor: default;
+  white-space: nowrap;
   overflow: hidden;
 }
 .details .song-details h1 {

@@ -6,12 +6,6 @@ const tracks = [
     img: 'assets/feint-time-bomb.jpg'
   },
   {
-    name: 'Energy Drink',
-    author: 'Virtual Riot',
-    url: 'assets/virtual-riot-energy-drink.mp3',
-    img: 'assets/virtual-riot-energy-drink.jpg'
-  },
-  {
     name: 'Jungle Fury',
     author: 'Riot',
     url: 'assets/riot-jungle-fury.mp3',
@@ -23,5 +17,11 @@ const tracks = [
     url: 'assets/tokyo-machine-play.mp3',
     img: 'assets/tokyo-machine-play.jpg'
   },
+  {
+    name: 'Energy Drink',
+    author: 'Virtual Riot',
+    url: 'assets/virtual-riot-energy-drink.mp3',
+    img: 'assets/virtual-riot-energy-drink.jpg'
+  }
 
 ]

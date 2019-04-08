@@ -2,7 +2,7 @@ let song;
 let fft;
 
 let songId = 0;
-let w;
+let w;  // columns width
 
 const songName = document.querySelector('#song-details__name');
 const songAuthor = document.querySelector('#song-details__author');
@@ -12,9 +12,12 @@ let mainColor = [255, 255, 255];
 let oldColor = [255, 255, 255];
 
 const colors = [
-  [255, 30, 30],
-  [30, 255, 30],
-  [30, 30, 255]
+  [255, 30, 30],  // red
+  [30, 255, 30],  // green
+  [30, 30, 255],  // blue
+  [255, 255, 30], // yellow
+  [255, 30, 255], // pink
+  [30, 255, 255], // cyan
 ]
 
 function arraysEqual(a, b) {
@@ -28,6 +31,8 @@ function arraysEqual(a, b) {
   return true;
 }
 
+// Equalizer sketch
+
 let sketch1 = function (p) {
 
   p.preload = function () {
@@ -38,7 +43,7 @@ let sketch1 = function (p) {
   }
 
   p.setup = function () {
-    let canvas = p.createCanvas(p.windowWidth - 400, 250);
+    let canvas = p.createCanvas(950, 250);
     canvas.parent('canvas-holder');
     song.setVolume(.1);
     fft = new p5.FFT(0.8, 1024);
@@ -53,13 +58,16 @@ let sketch1 = function (p) {
     if ((song.isLoaded()) && (!song.isPlaying()) && (!song.isPaused())) {
       song.play();
     }
-    // song.onended(playNext);
+    // if ((!song.isPaused()) && (!song.isPlaying())) {
+    //   song.onended(p.playNext);
+    // }
   }
+
   p.drawEq = function () {
     p.clear();
     let spectrum = fft.linAverages(64);
     p.noStroke();
-    p.fill('rgba('+ mainColor[0] + ',' + mainColor[1] +',' + mainColor[2] +', .75)');
+    p.fill(`rgba(${mainColor[0]}, ${mainColor[1]}, ${mainColor[2]}, .75)`);
 
     for (let i = 0; i < spectrum.length; i++) {
 
@@ -91,7 +99,7 @@ let sketch1 = function (p) {
       p.changeData();
       coverSketch.changeCover();
     } else {
-      console.log('fuck you amerika');
+      console.log("Id can't be less than 0");
     }
   }
 
@@ -102,7 +110,7 @@ let sketch1 = function (p) {
       p.changeData();
       coverSketch.changeCover();
     } else {
-      console.log('fuck you amerika');
+      console.log("Id can't be bigger than tracks array length");
     }
   }
 
@@ -118,6 +126,8 @@ let sketch1 = function (p) {
     songAuthor.textContent = tracks[songId].author;
   }
 }
+
+// Cover sketch
 
 let sketch2 = function (p) {
 
@@ -182,28 +192,45 @@ let sketch2 = function (p) {
       }
     }
     catch {
-      console.log('блять обама');
+      console.log(e);
     }
   }
 
   p.setMainColor = function() {
     if ((mainColor[0] > mainColor[1]) && (mainColor[0] > mainColor[2])) {
-      mainColor = [255, 30, 30];
+      if (mainColor[0]*0.8 < mainColor[1]) {
+        mainColor = colors[3];
+      } else if (mainColor[0]*0.8 < mainColor[2]) {
+        mainColor = colors[4];
+      } else {
+        mainColor = colors[0];
+      }
     }
     if ((mainColor[1] > mainColor[0]) && (mainColor[1] > mainColor[2])) {
-      mainColor = [30, 255, 30];
+      if (mainColor[1]*0.8 < mainColor[2]) {
+        mainColor = colors[5];
+      } else if (mainColor[1]*0.8 < mainColor[0]) {
+        mainColor = colors[3];
+      } else {
+        mainColor = colors[1];
+      }
     }
     if ((mainColor[2] > mainColor[0]) && (mainColor[2] > mainColor[1])) {
-      mainColor = [30, 30, 255];
+      if (mainColor[2]*0.8 < mainColor[0]) {
+        mainColor = colors[4];
+      } else if (mainColor[2]*0.8 < mainColor[1]) {
+        mainColor = colors[5];
+      } else {
+        mainColor = colors[2];
+      }
     }
-    // console.log(mainColor);
   }
 }
-
 
 let eqSketch = new p5(sketch1);
 let coverSketch = new p5(sketch2);
 
+// Controls
 
 let prevBtn = document.querySelector('#prev-track');
 prevBtn.onclick = eqSketch.playPrev;
@@ -214,21 +241,5 @@ nextBtn.onclick = eqSketch.playNext;
 let pauseBtn = document.querySelector('#pause');
 pauseBtn.onclick = eqSketch.togglePlay;
 
-// function getColor() {
-//   coverSketch.loadPixels();
-//    let r = 0, g = 0, b = 0;
-//    let color;
 
-//    for (let i = 0; i < p.pixels.length; i += 4) {
-//      r += coverSketch.pixels[i];
-//      g += coverSketch.pixels[i + 1];
-//      b += coverSketch.pixels[i + 2];
-//    }
-
-//    r /= (coverSketch.pixels.length/4);
-//    g /= (coverSketch.pixels.length/4);
-//    b /= (coverSketch.pixels.length/4);
-
-//    return [Math.ceil(r), Math.ceil(g), Math.ceil(b)];
-// }
 
