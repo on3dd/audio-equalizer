@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background: radial-gradient(farthest-side at top left, rgba(255, 30, 30, .25), #000) no-repeat, #000;
+  background: radial-gradient(farthest-side at top left, rgba(255, 255, 255, 0.1), #000), #000;
   position: relative;
   font-family: 'Montserrat', sans-serif;
 }
