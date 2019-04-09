@@ -35,6 +35,8 @@ function arraysEqual(a, b) {
 
 let sketch1 = function (p) {
 
+  let flag = true;
+
   p.preload = function () {
     song = p.loadSound(tracks[songId].url);
     songName.textContent = tracks[songId].name;
@@ -80,6 +82,21 @@ let sketch1 = function (p) {
       }
       p.rect(i * w, p.height, w - 3, h);
     }
+
+    if (flag) {
+      p.hideEq();
+    }
+  }
+
+  p.hideEq = function() {
+    if (!song.isLoaded()) {
+      document.querySelector('#canvas-holder').style.visibility = "hidden";
+      document.querySelector('.cssload-container').style.display = "block";
+    } else {
+      document.querySelector('#canvas-holder').style.visibility = "visible";
+      document.querySelector('.cssload-container').style.display = "none";
+      flag = !flag;
+    }
   }
 
   p.togglePlay = function () {
@@ -119,6 +136,8 @@ let sketch1 = function (p) {
     song.stop();
     song = p.loadSound(tracks[songId].url);
     song.setVolume(.1);
+    p.hideEq();
+    flag = !flag;
   }
 
   p.changeData = function () {
